@@ -1,11 +1,13 @@
 
 == Welcome to Ledgeroo
 
-Ledgeroo is really a ledger but the name was already taken at the github. At the
-moment it is a rails based ledger that will keep everything nice and balanced.
-Batch functionality is also present for companies that still write checks the
-old fashioned way.  I bet there are still some typewriters out there clicking
-away...
+Ledgeroo is simply a rails based ledger designed to be very flexible. At the
+moment it provides views for checks and journal entries and will keep everything
+nice and balanced. Batch functionality is also present for companies that still
+write checks the old fashioned way.  I bet there are still some typewriters out
+there clicking away...
 
 In the future, ledgeroo should become more web services like so that it could 
-be very easily integrated into existing systems.
+be very easily integrated into existing systems, but in the meantime we'll 
+be working on balancing accounts and adding support for defined accounting
+periods and all the associated rules.
