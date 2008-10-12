@@ -1,0 +1,10 @@
+2007 05 08
+First public release!  Yay!
+
+2007 06 10
+You can now pass options as a Hash.
+You can specify default sort direction with :sort_direction in 'add_to_sortable_params' and 'sortable_order'.
+Removed controller name from sortable data key (allows sort solutions to be used across multiple controllers).
+
+2007 06 18
+Fixed bug with aliasing fields.

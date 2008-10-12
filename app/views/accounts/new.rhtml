@@ -1,0 +1,46 @@
+<h1>New account</h1>
+
+<%= error_messages_for :account %>
+
+<% form_for(:account, :url => accounts_path) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Description</b><br />
+    <%= f.text_field :description %>
+  </p>
+
+  <p>
+    <b>Account type</b><br />
+    <%= f.select :account_type_id, @account_types %>
+  </p>
+
+  <p>
+    <b>Number</b><br />
+    <%= f.text_field :number %>
+  </p>
+
+  <p>
+    <b>Bank number</b><br />
+    <%= f.text_field :bank_number %>
+  </p>
+
+  <p>
+    <b>Is inactive</b><br />
+    <%= f.select :is_inactive, [false,true] %>
+  </p>
+
+  <p>
+    <b>Parent</b><br />
+    <%= f.select :parent_id, @parent_accounts, :include_blank => true %>
+  </p>
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', accounts_path %>

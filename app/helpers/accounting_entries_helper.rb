@@ -1,0 +1,2 @@
+module AccountingEntriesHelper
+end

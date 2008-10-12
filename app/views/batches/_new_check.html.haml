@@ -1,0 +1,34 @@
+%h1 Write checks
+- the_url = @batch ? batch_checks_path(@batch) : checks_path.to_s
+%errors= error_messages_for :check
+- form_for :check, @check, :url => the_url  do |f|
+  %fieldset
+    %legend New Check
+    %table
+      %tr
+        %td.label Account:
+        - fields_for "check[new_entry_attributes][]", @credit_entry do |e|
+          %td= e.select 'account_id', @bank_accounts
+      %tr
+        %td.label Check#:
+        %td= f.text_field 'document_number', :size => 10, :value => @check.next_document_number, :id => 'check_number'
+      %tr
+        %td.label Date:
+        %td= f.date_select 'recorded_on'
+      %tr
+        %td.label Payee:
+        %td= f.text_field 'name', :size => 20
+      %tr.creditentry
+        %td.label Amount:
+        - fields_for "check[new_entry_attributes][]", @credit_entry do |e|
+          %td= e.text_field 'credit', :size => 12
+          
+  %entries_form= render :partial => 'checks/entries_form'
+  %p= f.hidden_field(:batch_id, :value => @batch.id) if @batch
+  %span= submit_tag 'Save and new'
+  %span= submit_tag 'Save'
+  - if @batch
+    %span= link_to 'Cancel', @batch
+
+  :javascript
+    $('check_number').focus();

@@ -1,0 +1,19 @@
+self << "<h1>Statements <span class='link_in_header'#{ link_to 'new', new_statement_path }</span></h1>"
+
+table{
+  tr{
+    %w{ Account Start End Closed }.each do |heading|
+      th heading
+    end
+  }  	
+  @statements.each do |statement|
+	  tr{
+			td statement.account.number_with_name
+			td statement.started_on
+			td statement.ended_on
+			td statement.is_closed
+			td{ link_to( 'Show', statement_path(statement) ) }
+			td{ link_to( 'Edit', edit_statement_path(statement) ) }
+		}
+	end
+}

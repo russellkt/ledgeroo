@@ -1,0 +1,27 @@
+<h1>Chart of Accounts
+	<span class='link_in_header'><%= link_to 'new', new_account_path %></span>
+</h1>
+
+<table class="entries">
+  <tr class="header">
+  	<% %w{ Number Name Type Debits Credits Balance }.each do |heading| %>
+    	<th><%= heading %></th>
+  	<% end %>
+	<th />
+	<th />
+  </tr>
+  <% @accounts.each do |account| %>
+		<tr class="<%=cycle("odd","even")%>">
+			<td style="padding-left: <%=account.number_of_ancestors * 1%>em"><%=account.number%></td>
+			<td style="padding-left: <%=account.number_of_ancestors * 1%>em"><%=account.name%></td>
+			<td><%=account.account_type.name%></td> 
+			<td class="money"><%=number_to_currency(account.debits)%></td>
+			<td class="money"><%=number_to_currency(account.credits)%></td>
+			<td class="money"><%=number_to_currency(account.balance)%></td>
+			<td><%= link_to 'Entries', entries_path(account) %></td>
+			<td><%= link_to 'Edit', edit_account_path(account) %></td>
+		</tr>
+	<%end%>
+  </tr>
+  
+</table>

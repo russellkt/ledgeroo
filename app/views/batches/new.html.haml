@@ -1,0 +1,4 @@
+%h2 New Batch
+- form_for @batch do |f|
+  = form_field 'Date', f.date_select(:date)
+  = form_field '',     submit_tag('Start Batch')

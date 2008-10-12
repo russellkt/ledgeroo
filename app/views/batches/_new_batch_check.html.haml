@@ -1,0 +1,12 @@
+- next_check_number = @check ? @check.next_document_number : ''
+%table#entry_fields
+  %tr#firstEntryRow
+    %td= f.text_field 'document_number', :size => 10, :value => next_check_number, :id => 'check_number'
+    %td= f.calendar_date_select 'recorded_on',:size => '10', :value => @todays_date
+    %td= f.text_field 'name', :size => 20
+    - fields_for "check[new_entry_attributes][]", @entry do |e|
+      %td= e.select 'account_id', @expense_accounts
+    - fields_for "check[new_entry_attributes][]", @entry do |e|
+      %td.money= "$ #{e.text_field('debit', :size => 12)}"
+      %td
+        = link_to famfamfam_icon("add"), batch_path(@batch), { :id => 'firstAddEntryButton' }

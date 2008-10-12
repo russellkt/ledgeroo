@@ -1,0 +1,10 @@
+setup :fixtures => :all
+open '/batches'
+click_and_wait 'link=New Batch'
+click_and_wait 'commit'
+type 'check_name', 'Josh'
+type 'credit_entry_credit', '100'
+type 'debit_entries__debit', '100'
+click_and_wait 'commit'
+click_and_wait 'link=Cancel'
+assert_text_present 'Batch Date'

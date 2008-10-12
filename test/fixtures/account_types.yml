@@ -1,0 +1,101 @@
+# == Schema Information
+# Schema version: 13
+#
+# Table name: account_types
+#
+#  id               :integer         not null, primary key
+#  name             :string(255)     
+#  account_group_id :integer         
+#
+
+bank:
+  id: 1
+  name: bank 
+  account_group_id: 1
+  
+ar:
+  id: 2
+  name: accounts receivable
+  account_group_id: 1
+  
+other_current_asset:
+  id: 3
+  name: other current asset
+  account_group_id: 1
+  
+fixed_asset:
+  id: 4
+  name: fixed asset
+  account_group_id: 1
+  
+other_asset:
+  id: 5
+  name: other asset
+  account_group_id: 1
+  
+deferred_expense:
+  id: 6
+  name: deferred expense
+  account_group_id: 1
+  
+ap:
+  id: 7
+  name: accounts payable
+  account_group_id: 2
+  
+cc:
+  id: 8
+  name: credit card
+  account_group_id: 2
+
+other_current_liability:
+  id: 9
+  name: other current liability
+  account_group_id: 2
+  
+other_liability: 
+  id: 27
+  name: other liability
+  account_group_id: 2
+  
+long_term_liability:
+  id: 10
+  name: long term liability
+  account_group_id: 2
+
+deferred_revenue:
+  id: 11
+  name: deferred revenue
+  account_group_id: 2
+  
+equity:
+  id: 12
+  name: equity
+  account_group_id: 3
+  
+income: 
+  id: 13
+  name: income
+  account_group_id: 4
+  
+other_income:
+  id: 14
+  name: other income
+  account_group_id: 4
+
+cogs:
+  id: 15
+  name: cost of goods sold
+  account_group_id: 5
+
+expense:
+  id: 25
+  name: expense
+  account_group_id: 5
+  
+other_expense:
+  id: 26
+  name: other expense
+  account_group_id: 5
+
+  

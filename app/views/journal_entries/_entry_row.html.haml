@@ -1,0 +1,6 @@
+- @entry = entry_row
+- fields_for 'entries[]', @entry do |e|
+  %tr.entryrow
+    %td= e.select('account_id', @accounts, {}, :class => 'account_id')
+    %td= e.text_field( 'debit', :size => 10, :class => 'float debit' )
+    %td= e.text_field( 'credit', :size => 10, :class => 'float credit' )

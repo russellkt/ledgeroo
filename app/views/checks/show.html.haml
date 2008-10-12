@@ -1,0 +1,13 @@
+%h1= "Check ##{@check.document_number}"
+%table.entries
+  %th Check#
+  %th Payee
+  %th Amount
+  %tr
+    %td= @check.document_number
+    %td= @check.is_void? ? "void" : @check.name.gsub("\n","<br \>")
+    %td.money= number_to_currency( @check.total_credits )
+    %td
+      %span= link_to( 'Edit',  edit_check_path( @check ) ) if @check.editable?
+      %span= link_to( 'Void',  void_check_path( @check ) ) unless @check.is_void? 
+      %span= link_to( 'Print', formatted_print_check_path( @check,:pdf ) )

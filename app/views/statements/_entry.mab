@@ -1,0 +1,11 @@
+@entry = entry 
+tr(:class=>cycle("odd","even")){
+  td{ 
+    check_box_tag 'entries[]', entry.id, entry.statement_id, :id=>"entry_#{entry.id}_checkbox", :class=>"entry_checkbox"
+  }
+  td entry.accounting_transaction.recorded_on
+  td entry.accounting_transaction.name
+  td entry.accounting_transaction.transaction_type
+  td(:id=>"debit_#{entry.id}"){ number_with_precision(entry.debit,2) }
+  td(:id=>"credit_#{entry.id}"){ number_with_precision(entry.credit,2) }
+}

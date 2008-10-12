@@ -1,0 +1,42 @@
+Type,Number,Date,Name,Account,Debit,Credit
+<% @accounting_transactions.each do |tran| -%>
+<%
+credit_entries = tran.credit_entries
+credit_entry = credit_entries.shift || AccountingEntry.new
+arr =  []
+arr << tran.transaction_type.capitalize
+arr << tran.document_number
+arr << tran.recorded_on
+arr << "#{tran.name.to_s.gsub(/,/, "")}"
+arr << credit_entry.account_number_with_name
+arr << ''
+arr << credit_entry.credit
+-%>
+<%= arr.join(",") + "\n" -%>
+<% credit_entries.each do |ce| -%>
+<%
+arr =  []
+arr << tran.transaction_type.capitalize
+arr << tran.document_number
+arr << tran.recorded_on
+arr << "#{tran.name.to_s.gsub(/,/, "")}"
+arr << ce.account_number_with_name
+arr << ''
+arr << ce.credit
+-%>
+<%= arr.join(",") + "\n" -%>
+<% end -%>
+<% tran.debit_entries.each do |de| -%>
+<%
+arr =  []
+arr << tran.transaction_type.capitalize
+arr << tran.document_number
+arr << tran.recorded_on
+arr << "#{tran.name.to_s.gsub(/,/, "")}"
+arr << de.account.number_with_name
+arr << de.debit
+arr << ''
+-%>
+<%= arr.join(",") + "\n" -%>
+<% end -%>
+<% end -%>

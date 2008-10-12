@@ -1,0 +1,14 @@
+%html
+  %head
+    = javascript_include_tag 'prototype','lowpro','endless_page','application'
+    = stylesheet_link_tag 'base', 'batches', 'checks'
+    = calendar_date_select_includes
+  %title Ledger
+  %body
+    %div{:class => "twocol", :id => "topbar"}
+      %div{:class => "left"}
+        %img{:alt => "BMIC", :src => "/images/plainbm2.png"}
+      = render :partial => 'shared/navbar'
+    #content
+      = display_standard_flashes
+      = yield

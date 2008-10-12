@@ -1,0 +1,7 @@
+- links = []
+- if params[:action] =~ /index/ && !Batch.any_unfinalized?
+  - links << link_to('New Batch', new_batch_path) 
+- elsif @batch && !@batch.is_finalized?
+  - links << link_to('Import Claim Checks', import_claim_checks_batch_path(@batch) ) 
+  - links << link_to('Import Legacy Checks', import_legacy_checks_batch_path(@batch) ) 
+= render_toolbar links

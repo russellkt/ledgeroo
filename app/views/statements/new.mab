@@ -1,0 +1,36 @@
+the_url = statements_path.to_s
+h1 'Statements'
+div.errors do
+  error_messages_for :statement
+end
+form_for(:statement, :url => '/statements', :html => {:id => 'statements_form'})  do |f| 
+  fieldset { 
+    legend 'New Statement'
+    table {
+      tr {
+        td.label 'Account: '
+        td{ f.select 'account_id', @accounts }
+      }
+      tr {
+        td.label 'Start Date: '
+        td{ f.date_select 'started_on' }
+      }
+      tr {
+        td.label 'End Date: '
+        td{ f.date_select 'ended_on' }
+      }
+      tr {
+        td.label 'Beginning Balance: '
+        td { f.text_field 'beginning_balance', :size => 7 }
+      }
+      tr {
+        td.label 'Ending Balance: '
+        td { f.text_field 'ending_balance', :size => 7 }
+      }
+    }
+  }
+  p{
+    submit_tag 'Create' 
+  }  
+end
+

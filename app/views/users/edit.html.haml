@@ -1,0 +1,9 @@
+= error_messages_for :user
+
+- form_for :user, :url => user_path(@user), :html => { :method => :put } do |f|
+  = form_field 'Login',    f.text_field(:login)
+  = form_field 'Email',    f.text_field(:email)
+  = form_field 'Password', f.password_field(:password)
+  = form_field 'Password Confirmation', f.password_field(:password_confirmation)
+  = form_field 'Roles',    select_tag("roles[]", options_for_select(User::ROLES, @user.roles.map(&:name)), { :multiple => true, :size => 6})
+  = form_field '', submit_tag('Update User')

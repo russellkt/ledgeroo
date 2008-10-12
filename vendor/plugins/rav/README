@@ -1,0 +1,56 @@
+RAV: Rails Application Visualizer
+
+Copyright (C) 2006
+ Christoffer Sawicki <christoffer@imagio.se>
+ Phil Hagelberg <technomancy@gmail.com>
+
+INSTRUCTIONS
+
+  1) Install the Rails Application Visualizer plugin.
+     (script/plugin install svn://rubyforge.org/var/svn/rav/trunk)
+  2) Make sure you have Graphviz installed. You can get it from
+     http://graphviz.org/Download.php or through your OS package system.
+  3) Chuckle and execute "rake visualize"!
+
+OPTIONS
+
+  Usage: rake visualize [FILENAME=filename] [MODELS=no] [CONTROLLERS=no]
+
+    FILENAME specifies where you want the diagram. Default is
+    'doc/diagram.png' in RAILS_ROOT. RAV guesses the format to use
+    from the filename, so be sure to give it a proper extension. You
+    may use any extension that Graphviz supports, including PNG, SVG,
+    GIF, JPG, PS and even (no joke) VRML. If you want to generate a
+    raw dot file for further editing in Graphviz, just specify a .dot
+    extension.
+
+    By default the diagram includes both models and controllers, but
+    you may disable either with MODELS=no and CONTROLLERS=no.
+
+NOTES
+
+  On Mac OS X, you can use the Cocoa version of Graphviz available
+  from http://www.pixelglow.com/graphviz/download/ as long as you link
+  the executable to a place on your path. (e.g. ln -s
+  /Applications/Graphviz.app/Contents/MacOS/dot /usr/local/bin/dot)
+  Using the Cocoa version is recommended as the DarwinPorts version
+  does not use the right fonts.
+
+  You need to be in your RAILS_ROOT when you execute "rake visualize".
+
+LICENSE
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+

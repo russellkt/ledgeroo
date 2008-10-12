@@ -1,0 +1,5 @@
+tr.header{
+  %w{ cleared date name type debit credit }.each do |heading|
+    th heading
+  end
+}

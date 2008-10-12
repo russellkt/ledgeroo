@@ -1,0 +1,150 @@
+th {
+	text-align: left;
+}
+td.money, td.numeric, td.right,
+th.money, th.numeric, th.right{
+	text-align: right;
+}
+table.entries{
+	border-collapse: collapse;
+	margin-right: 2em;
+}
+.entries tr.header,
+.entries thead th{
+	background-color: #333;
+	border-bottom: solid 1px #000;
+	color: #FFF;
+}
+table.statement th{
+	text-align: right;
+}
+legend{
+	font-size: 1.5em;
+	font-weight: bold;
+}
+.even{
+	background-color: #D0F6AC;
+	border-bottom: solid 1px #A1EC5F;
+}
+table.entries td{
+	border-collapse: collapse;
+	vertical-align: top;
+}
+#menu ul{
+	padding-left: 0;
+	margin-left: 0;
+	background-color: #036;
+	color: White;
+	float: left;
+	width: 100%;
+	font-family: arial, helvetica, sans-serif;
+}
+
+#menu ul li { display: inline; }
+
+#menu ul li a{
+	padding: 0.2em 1em;
+	background-color: #036;
+	color: White;
+	text-decoration: none;
+	float: left;
+	border-right: 1px solid #fff;
+}
+
+#menu ul li a:hover {
+	background-color: #369;
+	color: #fff;
+}
+.clear{
+  clear: both;
+}
+thead th a{
+  color: white;
+}
+
+body{
+  font-family: "Bitstream Vera Sans", Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+img {
+ border:0pt none;
+}
+
+.twocol .left{
+ float: left;
+}
+#topbar{
+ background-color: #303030;
+}
+#topbar .right{
+ margin-left: 86px;
+ padding-top: 68px;
+}
+
+ul.navbar{
+ list-style-type: none;
+}
+
+ul.navbar li{
+ display: inline;
+}
+
+ul#menu
+{
+  margin:0;
+  padding:0;
+  list-style-type:none;
+  width:auto;
+  position:relative;
+  display:block;
+  height:36px;
+  font-size:12px;
+  font-weight:bold;
+  text-transform:lowercase;
+  background:transparent url("/images/bg.jpg") repeat-x top left;
+  font-family:"Trebuchet MS",Helvetica,Arial,Verdana,sans-serif;
+  border-bottom:1px solid #000000;
+  border-top:1px solid #000000;
+}
+
+ul#menu li
+{
+  display:block;
+  float:left;
+  margin:0;
+  padding:0;
+}
+
+ul#menu li a
+{
+  display:block;
+  float:left;
+  color:#999999;
+  text-decoration:none;
+  font-weight:bold;
+  padding:12px 20px 0 20px;
+  height:24px;
+}
+
+ul#menu li a:hover
+{ 
+  color:#FFFFFF;
+  background:transparent url("/images/over.jpg") no-repeat top right;  
+}
+p.formfield label{
+ width: 160px;
+ display: block;
+ float: left;
+ text-align: right;
+ margin-bottom: 8px;
+ margin-top: 4px;
+ margin-right: 10px;
+ color: #333;
+}
+form.subdued,
+div.subdued{
+ background-color: #eee;
+ padding: 10px;
+ border: 1px solid #aaa;
+}

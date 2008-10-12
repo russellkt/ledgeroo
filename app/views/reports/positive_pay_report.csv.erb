@@ -1,0 +1,10 @@
+<% @accounting_entries.each do |entry| -%>
+<%
+arr = []
+arr << '0000007010'
+arr << entry.accounting_transaction.recorded_on.strftime('%m%d%y')
+arr << entry.accounting_transaction.document_number
+arr << number_with_precision(entry.credit, 2)
+-%>
+<%= "\n" + arr.join(",") -%>
+<% end -%>

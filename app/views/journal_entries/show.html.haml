@@ -1,0 +1,11 @@
+%h1= "Journal Entry #{@journal_entry.document_number}"
+%table
+  %tr.header
+    %th Entry#
+    %th Memo
+    %th Amount
+  %tr
+    %td= @journal_entry.document_number
+    %td= @journal_entry.memo
+    %td= @journal_entry.total_credits
+    %td= link_to( 'Edit', edit_journal_entry_path( @journal_entry ) )

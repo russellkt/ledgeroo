@@ -1,0 +1,25 @@
+- the_url = check_path(@check).to_s
+%errors= error_messages_for :check
+- form_for :check, @check, :url => the_url, :html => { :method => :put, :id => 'check-form' } do |f|
+  %fieldset 
+    %legend=  "Edit Check##{@check.document_number}"
+    %table 
+      %tr 
+        %td.label Account:
+        - fields_for "check[existing_entry_attributes][]", @credit_entry do |e|
+          %td= e.select 'account_id', @bank_accounts
+      %tr 
+        %td.label Check#:
+        %td= f.text_field 'document_number', :size => 10, :id => 'check_number'
+      %tr
+        %td.label Date: 
+        %td= f.date_select( 'recorded_on' )
+      %tr
+        %td.label Payee: 
+        %td= f.text_area 'name', :rows => 4, :width => 50
+      %tr.creditentry
+        %td.label Amount: 
+        - fields_for "check[existing_entry_attributes][]", @credit_entry do |e|
+          %td= e.text_field 'credit', :size => 12
+    %entries_form= render :partial => 'checks/entries_form'
+    %p= submit_tag 'Update' 

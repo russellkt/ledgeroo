@@ -1,0 +1,18 @@
+javascript_include_tag :defaults, 'statement'
+the_url = statement_path(@statement).to_s
+h1 'Balance Statement'
+div.errors do
+  error_messages_for :statement
+end
+render :partial=>'statement_summary'
+form_for :statement, @statement, :url=>the_url, :html=>{:method=>'put'} do |f|
+fieldset.entries{
+  legend 'Entries'
+  table.entries{
+    render :partial=>'entry_header' 
+    render :partial=>'entry', :collection=>@uncleared_entries.concat(@cleared_entries)
+  }  
+}
+submit_tag 'Update Summary', :id=>'update_summary_submit'
+submit_tag 'Save'
+end

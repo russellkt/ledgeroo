@@ -1,0 +1,25 @@
+<h1><%=@account.number_with_name%> Accounting Entries</h1>
+<fieldset>
+  <table class="entries">
+    <tr class="header">
+    	<% %w{ Date Name Debit Credit Memo}.each do |head| %>
+	      	<th><%= head %></th>
+    	<% end %>
+		<th /><th />
+	</tr>
+   	<% @accounting_entries.each do |entry|
+	  unless entry.accounting_transaction.is_void then %>
+		<tr class="<%=cycle("odd","even")%>">
+  			<td><%= entry.accounting_transaction.recorded_on %></td>
+  			<td><%= entry.accounting_transaction.name %></td>
+  			<td class="money"><%=number_to_currency(entry.debit) if entry.debit%></td>
+  			<td class="money"><%=number_to_currency(entry.credit) if entry.credit%></td>
+  			<td><%= entry.memo_or_transaction_memo %>
+  			<td>
+				<%= link_to 'Show', transaction_type_path(entry.accounting_transaction) %>
+			</td>
+  		</tr>
+		<%end
+	  end%>
+  </table>
+</fieldset>

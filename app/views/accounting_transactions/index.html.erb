@@ -1,0 +1,18 @@
+<h1>Listing accounting_transactions</h1>
+
+<table>
+  <tr>
+  </tr>
+  
+<% for accounting_transaction in @accounting_transactions %>
+  <tr>
+    <td><%= link_to 'Show', transaction_path(accounting_transaction) %></td>
+    <td><%= link_to 'Edit', edit_transaction_path(accounting_transaction) %></td>
+    <td><%= link_to 'Destroy', transaction_path(accounting_transaction), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New accounting_transaction', new_transaction_path %>

@@ -1,0 +1,12 @@
+.errors
+  %span= error_messages_for :accounting_entries
+#entryrows
+  %table
+    %thead
+      %tr
+        %th Account
+        %th#debit_header Debit
+        %th#credit_header Credit
+        %th#balance_header Difference
+    %tbody.entrybody
+      = render :partial => 'entry_row', :collection => @entries

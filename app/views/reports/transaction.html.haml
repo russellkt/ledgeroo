@@ -1,0 +1,7 @@
+%h2 Transaction Report
+
+- form_tag transaction_reports_path, :class => 'subdued' do
+  Please enter the date range of interest for the report.
+  = form_field "From:", calendar_date_select_tag(:from, @from)
+  = form_field "To:",   calendar_date_select_tag(:to,   @to)
+  = submit_tag "Run Report"

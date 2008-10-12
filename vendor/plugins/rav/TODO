@@ -1,0 +1,8 @@
+http://dev.technomancy.us/phil/report/9
+http://rubyforge.org/tracker/?group_id=1332
+
+* Handle different association options like :foreign_key
+* Handle controllers in modules
+* Don't show fields that are just associations
+* Consider doing the error handling in 'output' instead of the task
+* Check RAILS_ROOT usage

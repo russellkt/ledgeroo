@@ -1,0 +1,8 @@
+- batches = summary
+%table.summary
+  %thead
+    %tr
+      - ["Date", "Count", "Total Credits", "Total Debits", "Difference", "Finalized?"].each do |heading|
+        %th.right= heading
+  %tbody
+    = render :partial => 'summary_row', :collection => batches

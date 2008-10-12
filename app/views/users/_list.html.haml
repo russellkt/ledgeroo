@@ -1,0 +1,10 @@
+%table
+  %thead
+    %tr
+      %th Login
+      %th Roles
+  %tbody
+    - list.each do |user|
+      %tr
+        %td= link_to user.login, edit_user_path(user)
+        %td= user.roles.map(&:name).to_sentence

@@ -1,0 +1,22 @@
+# == Schema Information
+# Schema version: 13
+#
+# Table name: statements
+#
+#  id                :integer         not null, primary key
+#  account_id        :integer         
+#  started_on        :date            
+#  ended_on          :date            
+#  beginning_balance :decimal(10, 2)  
+#  ending_balance    :decimal(10, 2)  
+#  is_closed         :boolean         
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+bank_statement:
+  id: 1
+  account_id: 1
+  started_on: 2007-04-01
+  ended_on: 2007-04-30
+  beginning_balance: 0
+  ending_balance: 5000

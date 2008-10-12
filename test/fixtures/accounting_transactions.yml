@@ -1,0 +1,36 @@
+# == Schema Information
+# Schema version: 13
+#
+# Table name: accounting_transactions
+#
+#  id               :integer         not null, primary key
+#  name             :string(255)     
+#  document_id      :integer         
+#  document_number  :integer         
+#  memo             :string(255)     
+#  recorded_on      :date            
+#  created_at       :datetime        
+#  updated_at       :datetime        
+#  transaction_type :string(255)     
+#  is_void          :boolean         
+#  department_id    :integer         
+#  class_id         :integer         
+#  location_id      :integer         
+#  accountable_type :string(255)     
+#  accountable_id   :integer         
+#  reversal_id      :integer         
+#  batch_id         :integer         
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+checking_expense:
+  id: 1
+  is_void: false
+  document_number: 13000
+  transaction_type: check
+  recorded_on: 2008-06-15
+  
+journal_entry:
+  id: 2
+  is_void: false
+  document_number: 50

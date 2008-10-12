@@ -1,0 +1,19 @@
+- the_url=journal_entry_path(@journal_entry).to_s
+%h1 Journal Entry
+.errors
+  = error_messages_for :journal_entry
+- form_for(:journal_entry, @journal_entry, :url=>the_url, :html=>{:method=>'put'} ) do |f|
+  %fieldset
+    %legend Edit Journal Entry
+    %table 
+      %tr 
+        %td.label Entry#:
+        %td= f.text_field 'document_number', :size => 10, :id => 'journal_entry_number'
+      %tr
+        %td.label Date:
+        %td= f.date_select 'recorded_on' 
+      %tr
+        %td.label Memo: 
+        %td= f.text_field 'memo', :size => 30 
+    = render :partial => 'journal_entries/entries_form'
+    = submit_tag 'Save' 

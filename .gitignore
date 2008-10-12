@@ -1,0 +1,8 @@
+.DS_Store
+log/*.log
+config/database.yml
+tmp/**/*
+db/*.sqlite3
+nbproject
+/**/.svn/**/*
+.svn/**/*

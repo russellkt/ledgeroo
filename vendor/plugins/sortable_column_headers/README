@@ -1,0 +1,162 @@
+SortableColumnHeaders (SCH)
+(a Ruby on Rails plugin)
+
+======
+
+This plugin provides three handy methods which allow you to add sortability to your tabular data.
+
+
+First, in your controller method you'll want to specify what you want sorted.
+
+	def index
+		add_to_sortable_columns(sortable_name,*args)
+		...
+	end
+
+The sortable_name is an arbitrary identifier which allows you to specify more than one sortable dataset for a given controller.  Here are some examples of valid argument combinations:
+
+	add_to_sortable_columns('search', Reader)                       # This will add all fields from the Reader table
+	add_to_sortable_columns('search', Book, 'title')                # This will add 'books.title'
+	add_to_sortable_columns('search', Book, 'author_id', 'author')  # This will add 'books.author_id' with an alias of 'author'
+	add_to_sortable_columns('search', 'books.checked_out_at')       # This will add 'books.checked_out_at'
+	add_to_sortable_columns('search', 'book_check_in')              # This will add 'some_field_as' (which you have specifically SELECTed AS in your SQL query):
+
+Also acceptable is the "new" way where options are passed in a Hash:
+
+	add_to_sortable_columns('search', :model => Reader)
+	add_to_sortable_columns('search', :model => Book, :field => 'title')
+	add_to_sortable_columns('search', :model => Book, :field => 'author_id', :alias => 'author')
+	add_to_sortable_columns('search', :field => 'books.checked_out_at')
+	add_to_sortable_columns('search', :field => 'book_check_in')
+
+The "new" way also includes an option for specifying a default sort direction:
+
+	add_to_sortable_columns('search', :model => Reader, :field => 'name', :sort_direction => :desc)
+	add_to_sortable_columns('search', :model => Book, :field => 'title', :sort_direction => :asc)
+
+In the above example, your sort order would be something like "books.title ASC, readers.name DESC".
+(NOTE: the field order is the reverse of the order of the lines of code. FILO!)
+
+Second, you'll want to turn your column headers into links in your views:
+
+	<%= link_to 'Reader',   sort_param('search', Reader, 'name') %>
+	<%= link_to 'Title',    sort_param('search', Book, 'title') %>
+	<%= link_to 'Author',   sort_param('search', 'author') %>
+	<%= link_to 'Checkout', sort_param('search', 'books.checked_out_at') %>
+	<%= link_to 'Checkin',  sort_param('search', 'book_check_in') %>
+
+All sort_param does is return a hash for you to pass as a param, something like { :sortasc => 'search-name' }.
+
+Just to be clear, here are some examples of controller "add_to_sortable_columns" and view "sort_param" pairs:
+
+	Bulk model fields ...
+	add_to_sortable_columns('search', Reader)
+	<%= link_to 'ID',     sort_param('search', Reader, 'id') %>
+	<%= link_to 'Reader', sort_param('search', Reader, 'name') %>
+
+	Single fields ...
+	add_to_sortable_columns('search', Book, 'title')
+	<%= link_to 'Title', sort_param('search', Book, 'title') %>
+
+	Aliased single fields ...
+	add_to_sortable_columns('search', Book, 'author_id', 'author')
+	<%= link_to 'Title', sort_param('search', 'author') %>
+
+	Specific single SQL-driven fields ...
+	add_to_sortable_columns('search', 'books.checked_out_at')
+	<%= link_to 'Checkout', sort_param('search', 'books.checked_out_at') %>
+
+	Ambiguous single SQL-driven fields ...
+	add_to_sortable_columns('search', 'book_check_in')
+	<%= link_to 'Checkin',  sort_param('search', 'book_check_in') %>
+
+	Both "specific" and "ambiguous" SQL-driven fields can be aliased ...
+	add_to_sortable_columns('search', 'book_check_in', 'checkin')
+	<%= link_to 'Checkin',  sort_param('search', 'checkin') %>
+
+Just to be super, double clear, here are some similar examples for the "new" way ...
+
+	Bulk model fields ...
+	add_to_sortable_columns('listing2', :model => Reader)
+	<%= link_to 'ID',     sort_param('search', :model => Reader, :field => 'id') %>
+	<%= link_to 'Reader', sort_param('search', :model => Reader, :field => 'name') %>
+
+	Single fields ...
+	add_to_sortable_columns('search', :model => Book, :field => 'title')
+	<%= link_to 'Title', sort_param('search', :model => Book, :field => 'title') %>
+
+	Aliased single fields ...
+	add_to_sortable_columns('search', :model => Book, :field => 'title', :alias => 'title')
+	<%= link_to 'Title', sort_param('search', :alias => 'title') %>
+
+	Specific single SQL-driven fields ...
+	add_to_sortable_columns('search', :field => 'books.checked_out_at')
+	<%= link_to 'Checkout', sort_param('search', :field => 'books.checked_out_at') %>
+
+	Ambiguous single SQL-driven fields ...
+	add_to_sortable_columns('search', :field => 'book_check_in')
+	<%= link_to 'Checkin',  sort_param('search', :field => 'book_check_in') %>
+
+	Both "specific" and "ambiguous" SQL-driven fields can be aliased ...
+	add_to_sortable_columns('search', :field => 'book_check_in', :alias => 'checkin')
+	<%= link_to 'Checkin',  sort_param('search', :alias => 'checkin') %>
+
+If you want your links even "prettier" (i.e., { :sortasc => 'name' }) then you can append a bang ('!') to the end of the alias:
+
+	<%= link_to 'Reader', sort_param('search', Reader, 'name!') %>
+
+Only use the "bang" if your alias is unique to your sort solution.  Weird things will happen if 'name' appears in any form in other sort solutions.
+	
+	
+Third, going back to the controller, use the following method ...
+
+	sortable_order(sortable_name, *args)
+  
+... to process the sort params in your page request and return a string containing all the sorted fields for use in an ORDER BY clause, something like 'readers.name ASC, books.author_id DESC'.
+
+	def index
+		add_to_sortable_columns('search', Reader)
+		add_to_sortable_columns('search', Book, 'title')
+		add_to_sortable_columns('search', Book, 'author_id', 'author') 
+		add_to_sortable_columns('search', 'books.checked_out_at')
+		add_to_sortable_columns('search', 'book_check_in')
+
+		@books = Reader.find :all, 
+		                     :include => [{ :books => :authors }],
+		                     :order => sortable_order('search',Author,'id')  # Will sort by 'authors.id' by default.
+
+		# DISCLAIMER: I haven't tested this specific sample code.  But you get the idea ;)
+		...
+	end
+
+And, of course, the "new" way:
+
+	@books = Reader.find :all, 
+	                     :include => [{ :books => :authors }],
+	                     :order => sortable_order('search', 
+	                                              :model => Author,
+	                                              :field => 'id'
+	                                              :sort_direction => :desc)  # Will sort by 'authors.id DESC' by default.
+
+
+Fourth, BONUS METHOD!  This plugin stores all sorts in the user session.  You can reset the sorting history with the following method:
+
+	reset_sortable_columns
+
+And that's about it for now.
+
+Cheers!
+
+Colman
+
+=============================================================================
+
+SortableColumnHeaders
+(a plugin for Ruby on Rails)
+http://wush.net/svn/public/sortable_column_headers
+
+Copyright (c) 2007 ELC Technologies
+Written by Colman Nady, ELC Technologies
+http://www.elctech.com
+
+Please read our LICENSE in the attached file MIT-LICENSE.

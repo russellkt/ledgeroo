@@ -1,0 +1,23 @@
+%table.checks.entries
+  %thead
+    %th Number
+    %th Date
+    %th Name
+    %th Account
+    %th.money{ :colspan => 2 } Debit
+  %tbody
+    - checks_list.each do |check|
+      - klass        = cycle("odd", "even")
+      - debits       = check.debit_entries
+      %tbody{ :class => klass }
+        %tr
+          %td
+            = link_to(check.document_number, visit_batch_check(@batch, check))
+          %td= check.recorded_on
+          %td= check.name
+          %td= check.displayed_debit_account
+          %td.money= number_to_currency check.total_debits
+          %td
+            - unless @batch.finalized
+              = link_to( famfamfam_icon("cross"), batch_check_path(@batch, check), {:method => :delete } )
+              = link_to( 'Void', void_check_path(check) )

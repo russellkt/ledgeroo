@@ -1,0 +1,20 @@
+fieldset.statement{ 
+  legend 'Statement'
+  table.statement{
+    tr{
+      th 'Account:'
+      td @statement.account.name
+    }
+    [{'Beginning Date'=>'started_on'}, {'Ending Date'=>'ended_on'},
+      {'Beginning Balance'=>'beginning_balance'}, {'Ending Balance'=>'ending_balance'},
+      {'Cleared Debits'=>'total_debits'}, {'Cleared Credits'=>'total_credits'},
+      {'Balance Difference'=>'balance_difference'}].each do |row|
+      tr{
+        th row.keys[0]
+        td(:class=>'money', :id=>row[row.keys[0]]){ 
+          row.keys[0] =~ /_on|_at/i ? @statement.send(row[row.keys[0]]) : number_with_precision(@statement.send(row[row.keys[0]]),2) 
+        } 
+      }
+    end
+  }
+}

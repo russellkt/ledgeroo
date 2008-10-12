@@ -1,0 +1,21 @@
+%h1 Journal Entry
+.errors
+  = error_messages_for :journal_entry
+- form_for(:journal_entry, :url => '/journal_entries', :id => 'journal_entries_form') do |f|
+  %fieldset
+    %legend New Journal Entry
+    %table
+      %tr  
+        %td.label Entry#:
+        %td= f.text_field 'document_number', :size => 10, :value => @journal_entry.next_document_number, :id => 'journal_entry_number' 
+      %tr
+        %td.label= "Date: "
+        %td= f.date_select 'recorded_on'
+      %tr
+        %td.label Payee:
+        %td= f.text_field 'name', :size => 30
+      %tr
+        %td.label Memo:
+        %td= f.text_field 'memo', :size => 30
+    = render :partial => 'journal_entries/entries_form'
+    %span= submit_tag 'Create' 

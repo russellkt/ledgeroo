@@ -1,0 +1,19 @@
+.journal_entries
+  %h1 Journal Entries
+
+  %table.entries
+    %tr.header
+      %th Entry#
+      %th Payee
+      %th Memo
+      %th Amount
+      %th 
+    - @journal_entries.each do |je|
+      %tr
+        %td= je.document_number
+        %td= je.name
+        %td= je.memo
+        %td= number_to_currency( je.total_debits )
+        %td= link_to( 'Show',journal_entry_path(je) )
+  .links
+    %span= link_to( 'New journal entry', new_journal_entry_path )

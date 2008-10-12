@@ -1,0 +1,20 @@
+h1 'Statement Summary'
+render :partial=>'statement_summary'
+fieldset.entries{
+  legend 'Cleared Entries'
+  table.entries{
+    render :partial=>'entry_header'
+    @statement.accounting_entries.each do |entry|
+      tr(:class=>cycle("odd","even")){
+        td.center 'x'
+        td entry.accounting_transaction.recorded_on
+        td entry.accounting_transaction.name
+        td entry.accounting_transaction.transaction_type
+        td{ number_to_currency(entry.debit) }
+        td{ number_to_currency(entry.credit) }
+      }
+    end
+  
+  }  
+}
+link_to 'Edit', edit_statement_path(@statement)

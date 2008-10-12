@@ -1,0 +1,8 @@
+- batch = summary_row
+%tr
+  %td= link_to batch.date, batch
+  %td= batch.accounting_transactions.count 
+  %td= number_to_currency(batch.total_credits)
+  %td= number_to_currency(batch.total_debits)
+  %td= number_to_currency(batch.difference) 
+  %td= batch.finalized? ? "X" : link_to('Finalize', finalize_batch_path(batch))

@@ -1,0 +1,7 @@
+- @checks.each do |check|
+  %tr{:class => cycle("odd","even"), :id => check.id}
+    %td= check.recorded_on
+    %td= link_to( check.document_number, check_path(check) )
+    %td= check.is_void? ? "void" : check.name.gsub("\n","<br \>")
+    %td.money= number_to_currency( check.total_credits )
+    

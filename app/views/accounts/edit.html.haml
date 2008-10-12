@@ -1,0 +1,31 @@
+%h1 Editing account
+
+%edit_form
+  -form_for(:account, :url => account_path(@account), :html => { :method => :put }) do |f|
+    %table
+      %tr
+        %th Name:
+        %td= f.text_field :name
+      %tr
+        %th Description:
+        %td= f.text_field :description
+      %tr
+        %th Subaccount of:
+        %td= f.select :parent_id, @parent_accounts, :include_blank => true
+      %tr
+        %th Account Type:
+        %td= f.select :account_type_id, @account_types
+      %tr
+        %th Number:
+        %td= f.text_field :number
+      %tr
+        %th Bank number:
+        %td= f.text_field :bank_number
+      %tr
+        %th Is inactive:
+        %td= f.select :is_inactive, [false,true] 
+      %tr
+        %td= submit_tag "Update"
+      
+%span= link_to( 'Show', account_path(@account) )
+%span= link_to( 'Back', accounts_path )

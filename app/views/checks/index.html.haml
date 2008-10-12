@@ -1,0 +1,18 @@
+.checks
+  .search
+    - form_tag '', { :method => :get } do
+      = select_tag :which, options_for_select([["Check #", "document_number"], ["Payee", "name"], ["Amount", "total"]], params[:which])
+      = text_field_tag :q, params[:q], :accesskey => "s"
+      = submit_tag 'Search'
+  %h1 Checks
+  = link_to 'New check', new_check_path
+  %table.entries
+    %thead
+      %tr.header
+        %th= link_to("Date",    sort_param('list', AccountingTransaction, 'recorded_on'))
+        %th= link_to("Check #", sort_param('list', AccountingTransaction, 'document_number'))
+        %th= link_to("Payee",   sort_param('list', AccountingTransaction, 'name'))
+        %th.numeric= link_to("Amount",  sort_param('list', AccountingTransaction, 'total'))
+    %tbody
+      =render :partial => 'check_list'
+  = will_paginate

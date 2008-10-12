@@ -1,0 +1,49 @@
+# == Schema Information
+# Schema version: 13
+#
+# Table name: accounting_entries
+#
+#  id                        :integer         not null, primary key
+#  accounting_transaction_id :integer         
+#  account_id                :integer         
+#  debit                     :decimal(10, 2)  
+#  credit                    :decimal(10, 2)  
+#  memo                      :string(255)     
+#  has_cleared               :boolean         
+#  created_at                :datetime        
+#  updated_at                :datetime        
+#  accountable_id            :integer         
+#  accountable_type          :string(255)     
+#  statement_id              :integer         
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+checking_credit:
+  id: 1
+  accounting_transaction_id: 1
+  account_id: 1
+  credit: 100
+expense_100:
+  id: 2
+  accounting_transaction_id: 1
+  account_id: 2
+  debit: 100
+checking_wo_trns:
+  id: 3
+  account_id: 6
+  credit: 100
+expense_wo_trns:
+  id: 4
+  account_id: 7
+  debit: 100
+journal_entry_debit:
+  id: 5
+  accounting_transaction_id: 2
+  account_id: 5
+  debit: 1000
+journal_entry_credit:
+  id: 6
+  accounting_transaction_id: 2
+  account_id: 6
+  credit: 1000
+  

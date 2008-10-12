@@ -1,0 +1,13 @@
+Date,Check #,Payee,Amount
+<% @checks.each do |check| -%>
+<%
+credit_entries = check.credit_entries
+credit_entry = credit_entries.shift || AccountingEntry.new
+arr =  []
+arr << check.recorded_on
+arr << check.document_number
+arr << "#{check.name.to_s.gsub(/,/, "")}"
+arr << number_with_precision(check.total,2)
+-%>
+<%= arr.join(',')%>
+<% end -%>

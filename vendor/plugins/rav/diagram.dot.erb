@@ -1,0 +1,68 @@
+digraph G {
+  bgcolor = "transparent"
+
+  node [
+    shape = "record"
+    style = "filled"
+    fontname = "Verdana"
+    fontsize = 9
+  ]
+
+  graph [
+    fontname = "Verdana"
+    fontsize = 14
+    style = "filled"
+    fillcolor = "white"
+  ]
+
+  <% if options[:models] %>
+    subgraph cluster_models {
+      label = "Models"
+
+      node [ fillcolor = "#f1ffe8" ]
+
+      <% models.each do |model| %>
+        <% if model.respond_to? :columns %>
+          "<%= model %>" [
+            <% rows = model.columns.map { |col| "<#{col.name}> #{col.name} (#{col.type})" } %>
+            label = "{ <%= model %> | <%= rows.join(' | ') %> }"
+          ]
+        <% else %>
+          "<%= model %>" [
+            label = "<%= model %>"
+          ]
+        <% end %>
+
+        <% if model.respond_to? :reflect_on_all_associations %>
+          <% model.reflect_on_all_associations.each do |assoc| %>
+            <% unless assoc.macro == :belongs_to %>
+              <% to = (assoc.options[:class_name] || assoc.name.to_s.capitalize).singularize.camelize %>
+              "<%= assoc.active_record %>" -> "<%= to %>" [ label = "<%= assoc.name.to_s.humanize.downcase %>" ];
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% unless [ Object, ActiveRecord::Base, ActionMailer::Base ].include?(model.superclass) %>
+          "<%= model %>" -> "<%= model.superclass %>" [ label = "is a" ];
+        <% end %>
+      <% end %>
+    }
+  <% end %>
+
+  <% if options[:controllers] %>
+    subgraph cluster_controllers {
+      label = "Controllers"
+
+      node [ fillcolor = "#ffe8e8" ]
+
+      <% controllers.each do |controller| %>
+        "<%= controller %>" [
+          <% rows = controller.instance_methods(false).map { |col| "<#{col}> #{col}" } %>
+          label = "{ <%= controller %> | <%= rows.join(' | ') %> }"
+        ]
+
+        <%= %("#{controller.superclass}" -> "#{controller}") unless controller == ApplicationController %>
+      <% end %>
+    }
+  <% end %>
+}

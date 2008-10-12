@@ -1,0 +1,20 @@
+claim_import:
+   id: 729, 
+   batch_id: 6
+   accountable_id: 1128 
+   accountable_type: "claim check"
+   document_number: 199881
+   recorded_on: "2008-08-12"
+   payee: "DANA & SHERRIE CLARK AND           "
+   account_number: "5148.0"
+   amount: 100
+   
+legacy_import:
+  id: 888,
+  accountable_id: 199899
+  accountable_type: "legacy check"
+  document_number: 199899
+  recorded_on: 2008-8-1
+  payee: "KEVIN RUSSELL              "
+  account_number: 5142
+  amount: 101

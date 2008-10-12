@@ -1,0 +1,7 @@
+- new_or_existing = entry_row.new_record? ? 'new' : 'existing'
+- prefix = "check[#{new_or_existing}_entry_attributes][]"
+- fields_for prefix, entry_row do |e|
+  %tr.entryrow
+    %td= e.select('account_id', @expense_accounts, {}, :class => 'account_id') 
+    %td= e.text_field 'debit', :size => 10, :class => 'float'
+    %td= e.text_field 'memo', :size => 50 

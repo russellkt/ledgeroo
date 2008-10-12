@@ -1,0 +1,40 @@
+%h2 Transaction Report
+
+%ul.links
+  %li= link_to ".csv", params.merge({ :format => 'csv' })
+
+%table.transaction_report.entries
+  %thead
+    %tr
+      %th Type
+      %th Number
+      %th Date
+      %th Name
+      %th Account
+      %th.money Debit
+      %th.money Credit
+  - @accounting_transactions.each do |tran|
+    - klass = cycle("odd", "even")
+    - credit_entries = tran.credit_entries
+    - credit_entry = credit_entries.shift || AccountingEntry.new
+    %tbody{ :class => klass }
+      %tr.credit
+        %td= tran.transaction_type.capitalize
+        %td= tran.document_number
+        %td= tran.recorded_on
+        %td= tran.name
+        %td= credit_entry.account_number_with_name
+        %td
+        %td.money= number_to_currency credit_entry.credit
+      - credit_entries.each do |ce|
+        %tr.credit
+          %td{ :colspan => 4 }
+          %td= ce.account_number_with_name
+          %td
+          %td.money= number_to_currency ce.credit
+      - tran.debit_entries.each do |de|
+        %tr.debit
+          %td{ :colspan => 4 }
+          %td= de.account_number_with_name
+          %td.money= number_to_currency de.debit
+          %td

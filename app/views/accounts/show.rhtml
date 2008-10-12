@@ -1,0 +1,38 @@
+<p>
+  <b>Name:</b>
+  <%=h @account.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @account.description %>
+</p>
+
+<p>
+  <b>Account type:</b>
+  <%=h @account.account_type_id %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%=h @account.number %>
+</p>
+
+<p>
+  <b>Bank number:</b>
+  <%=h @account.bank_number %>
+</p>
+
+<p>
+  <b>Is inactive:</b>
+  <%=h @account.is_inactive %>
+</p>
+
+<p>
+  <b>Parent:</b>
+  <%=h @account.parent_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>

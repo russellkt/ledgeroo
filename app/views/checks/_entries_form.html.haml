@@ -1,0 +1,12 @@
+%fieldset
+  %legend Entries
+  %errors= error_messages_for :accounting_entries
+ 
+  %entryrows
+  %table
+    %thead
+      %tr
+        %th Account
+        %th Amount
+        %th Memo
+    %tbody.entrybody= render( :partial => 'checks/entry_row', :collection => @entries )
